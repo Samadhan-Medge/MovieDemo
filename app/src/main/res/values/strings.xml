@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MovieApp</string>
+    <string name="search_movie_hint">Search for your favourite movie…</string>
+    <string name="search">Search</string>
+    <string name="release_year"> Release Year : %s</string>
+    <string name="retry">Retry</string>
+    <string name="error_message">Something went wrong, please try again later</string>
+    <string name="error_message_search_movie">Please enter valid movie name</string>
+    <string name="search_results">Search Results</string>
+</resources>

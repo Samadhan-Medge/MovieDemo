@@ -1,0 +1,122 @@
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.samadhan.movieapp.enums.APIState" />
+
+        <variable
+            name="apiState"
+            type="com.samadhan.movieapp.enums.APIState" />
+
+        <variable
+            name="movie"
+            type="com.samadhan.movieapp.models.Movie" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{apiState==APIState.SUCCESS?View.VISIBLE:View.GONE,default=gone}">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        imageURL="@{movie.Poster}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="400dp"
+                        android:scaleType="fitXY" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivBackButton"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="10dp"
+                        android:minHeight="40dp"
+                        android:onClick="performOnClick"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/back_arrow_circle" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/yellow"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{movie.Title}"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@{@string/release_year(movie.Year)}"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:text="@{movie.Plot}"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </ScrollView>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="@{apiState==APIState.LOADING?View.VISIBLE:View.GONE,default=gone}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="@{apiState==APIState.FAILURE?View.VISIBLE:View.GONE,default=gone}">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/error_message"
+                android:textSize="12sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRetry"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_background"
+                android:minHeight="40dp"
+                android:onClick="performOnClick"
+                android:text="@string/retry"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>
